@@ -1,0 +1,178 @@
+Skrip SQL Generate skema
+
+CREATE TABLE `Customers` (
+  `CustomerID` int(100) unsigned NOT NULL,
+  `CompanyName` varchar(50) DEFAULT NULL,
+  `FirstName` varchar(30) DEFAULT NULL,
+  `LastName` varchar(50) DEFAULT NULL,
+  `BillingAddress` varchar(255) DEFAULT NULL,
+  `City` varchar(50) DEFAULT NULL,
+  `StateOrProvince` varchar(20) DEFAULT NULL,
+  `ZIPCode` varchar(20) DEFAULT NULL,
+  `Email` varchar(75) DEFAULT NULL,
+  `CompanyWebsite` varchar(200) DEFAULT '',
+  `PhoneNumber` varchar(30) DEFAULT NULL,
+  `FaxNumber` varchar(30) DEFAULT NULL,
+  `ShipAddress` varchar(255) DEFAULT NULL,
+  `ShipCity` varchar(50) DEFAULT NULL,
+  `ShipStateOrProvince` varchar(50) DEFAULT NULL,
+  `ShipZIPCode` varchar(20) DEFAULT NULL,
+  `ShipPhoneNumber` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`CustomerID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `Employees` (
+  `EmployeeID` int(100) unsigned NOT NULL,
+  `FirstName` varchar(50) DEFAULT NULL,
+  `LastName` varchar(50) DEFAULT NULL,
+  `Title` varchar(50) DEFAULT NULL,
+  `WorkPhone` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`EmployeeID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `Order_Details` (
+  `OrderDetailID` int(100) unsigned NOT NULL,
+  `OrderID` int(100) DEFAULT NULL,
+  `ProductID` int(100) DEFAULT NULL,
+  `Quantity` int(100) DEFAULT NULL,
+  `UnitPrice` int(100) DEFAULT NULL,
+  `Discount` int(100) DEFAULT NULL,
+  PRIMARY KEY (`OrderDetailID`),
+  KEY `OrderID` (`OrderID`),
+  KEY `ProductID` (`ProductID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `Orders` (
+  `OrderID` int(100) unsigned NOT NULL,
+  `CustomerID` int(100) DEFAULT NULL,
+  `EmployeeID` int(100) DEFAULT NULL,
+  `OrderDate` date DEFAULT NULL,
+  `PurchaseOrderNumber` varchar(30) DEFAULT NULL,
+  `ShipDate` date DEFAULT NULL,
+  `ShippingMethodID` int(100) DEFAULT NULL,
+  `FreightCharge` int(100) DEFAULT NULL,
+  `Taxes` int(100) DEFAULT NULL,
+  `PaymentReceived` char(1) DEFAULT NULL,
+  `Comment` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`OrderID`),
+  KEY `CustomerID` (`CustomerID`),
+  KEY `EmployeeID` (`EmployeeID`),
+  KEY `ShippingMethodID` (`ShippingMethodID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `Products` (
+  `ProductID` int(100) NOT NULL,
+  `ProductName` varchar(50) DEFAULT NULL,
+  `UnitPrice` int(100) DEFAULT NULL,
+  `InStock` char(1) DEFAULT NULL,
+  PRIMARY KEY (`ProductID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `Shipping_Methods` (
+  `ShippingMethodID` int(100) unsigned NOT NULL,
+  `ShippingMethod` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`ShippingMethodID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+yang bikinan hibernate
+Hibernate:
+
+    create table customers (
+       customerid integer not null,
+        billing_address varchar(255),
+        city varchar(255),
+        company_name varchar(255),
+        company_website varchar(255),
+        email varchar(255),
+        fax_number varchar(255),
+        first_name varchar(255),
+        last_name varchar(255),
+        phone_number varchar(255),
+        ship_address varchar(255),
+        ship_city varchar(255),
+        ship_phone_number varchar(255),
+        ship_state_or_province varchar(255),
+        shipzipcode varchar(255),
+        state_or_province varchar(255),
+        zipcode varchar(255),
+        primary key (customerid)
+    ) engine=InnoDB
+Hibernate:
+
+    create table employees (
+       employeeid integer not null,
+        first_name varchar(255),
+        last_name varchar(255),
+        title varchar(255),
+        work_phone varchar(255),
+        primary key (employeeid)
+    ) engine=InnoDB
+Hibernate:
+
+    create table hibernate_sequence (
+       next_val bigint
+    ) engine=InnoDB
+Hibernate:
+
+    insert into hibernate_sequence values ( 1 )
+Hibernate:
+
+    insert into hibernate_sequence values ( 1 )
+Hibernate:
+
+    insert into hibernate_sequence values ( 1 )
+Hibernate:
+
+    insert into hibernate_sequence values ( 1 )
+Hibernate:
+
+    insert into hibernate_sequence values ( 1 )
+Hibernate:
+
+    insert into hibernate_sequence values ( 1 )
+Hibernate:
+
+    create table order_details (
+       order_detailid integer not null,
+        discount integer,
+        orderid integer,
+        productid integer,
+        quantity integer,
+        unit_price integer,
+        primary key (order_detailid)
+    ) engine=InnoDB
+Hibernate:
+
+    create table orders (
+       orderid integer not null,
+        comment varchar(255),
+        customerid integer,
+        employeeid integer,
+        freight_charge integer,
+        order_date datetime(6),
+        payment_received char(1),
+        purchase_order_number varchar(255),
+        ship_date datetime(6),
+        shipping_methodid integer,
+        taxes integer,
+        primary key (orderid)
+    ) engine=InnoDB
+Hibernate:
+
+    create table products (
+       productid integer not null,
+        in_stock varchar(255),
+        product_name varchar(255),
+        unit_price varchar(255),
+        primary key (productid)
+    ) engine=InnoDB
+Hibernate:
+
+    create table shipping_methods (
+       shipping_methodid integer not null,
+        shipping_method varchar(255),
+        primary key (shipping_methodid)
+    ) engine=InnoDB
+
